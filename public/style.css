@@ -9,16 +9,18 @@ html{
 #btn { 
     color: #222;
 }
+#git-logo{ 
+    margin-right: 16px;
+    align-self: flex-start;
+    display: flex;
+    z-index: 32;
+    padding: 16px;
+    font-size: 14px;
+    line-height: 1.5;
 
-.git-logo{ 
-    border-radius: 50%;
-    padding: 60px;
-    font-size: 30px;
-    position: relative;
-    margin-bottom: -55px;
 }
 .main-link{
-    color: lightskyblue;
+    color: #2188ff;
     margin-bottom: 55px;
 }
 .main-desc{ 

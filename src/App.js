@@ -2,13 +2,14 @@ import React from 'react';
 import {useEffect, useState} from 'react';
 import Search from './Search'
 
-
 const URL = 'https://api.github.com/search/repositories?q={query}'
 
 const App = () => { 
 
     const [posts, setPosts] = useState([]);
     const [filteredPosts, setFilteredPosts] = useState([]);
+    const [name, setName] = useState([]);
+    const [description, setDescription] = useState([]); 
 
     useEffect( async () => {
         const response = await fetch(`${URL}`, { 
@@ -22,21 +23,21 @@ const App = () => {
     }, [])   
 
     return (<>
-    <div className='header'> 
-    <a className='git-logo' href='https://github.com/'> <img src='/images/GitHub.png' /> </a></div>
+    <a id='git-logo' href='https://github.com/'> <img src='/images/github.png' /> </a>
     <div className='main'> 
    
-        <Search filteredPosts={filteredPosts} setFilteredPosts={setFilteredPosts} posts={posts} setPosts={setPosts} /> 
-
+        <Search filteredPosts={filteredPosts} setFilteredPosts={setFilteredPosts} posts={posts} setPosts={setPosts} name={name} setName={setName} description={description} setDescription={setDescription} /> 
+    
     {posts.map(post => { 
-        const {id, name, forks, forks_url, stargazers_count, stargazers_url, language, updated_at, html_url, full_name, description } = post; 
-        return (<><div key={id}></div>
+        const {id, stargazers_count, stargazers_url, language, updated_at, html_url, full_name, description } = post; 
+        return (<>
+        <div key={id}>
             <a classname='main-link' href={html_url}>{full_name}</a>
             <h3 className='main-desc'> {description} </h3>
             <p className='details'>  <a href={stargazers_url}> <img src={'/images/star.png'}/>{stargazers_count}</a> 
-            <p id='circle'></p> {language} <b>License:</b> {post?.license?.name} <b>Updated:</b> {updated_at.slice('t',10)}</p>
+            <p id='circle'></p> {language}  {post?.license?.name} <b>Updated:</b> {updated_at.slice('t',10)}</p>
             <br/>
-
+            </div>
             </>)
     })}
 
