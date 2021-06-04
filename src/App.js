@@ -15,7 +15,9 @@ const App = () => {
         const response = await fetch(`${URL}`, { 
             method: 'GET',
             headers: { 
-                'accept': 'application/vnd.github.v3+json'            
+                'accept': 'application/vnd.github.v3+json', 
+                // 'link': '<https://api.github.com/orgs/ORG/audit-log?after=MTYwMTkxOTU5NjQxM3xZbGI4VE5EZ1dvZTlla09uWjhoZFpR&before=>; rel="next"'
+                
             }
         }); 
         const data = await response.json();
@@ -32,10 +34,10 @@ const App = () => {
         const {id, stargazers_count, stargazers_url, language, updated_at, html_url, full_name, description } = post; 
         return (<>
         <div key={id}>
-            <a classname='main-link' href={html_url}>{full_name}</a>
+            <a className='main-link' href={html_url}>{full_name}</a>
             <h3 className='main-desc'> {description} </h3>
-            <p className='details'>  <a href={stargazers_url}> <img src={'/images/star.png'}/>{stargazers_count}</a> 
-            <p id='circle'></p> {language}  {post?.license?.name} <b>Updated:</b> {updated_at.slice('t',10)}</p>
+            <div className='details'>  <a href={stargazers_url}> <img src={'/images/star.png'}/>{stargazers_count}</a> 
+            <p id='circle'></p> {language}  {post?.license?.name} <b>Updated:</b> {updated_at.slice('t',10)}</div>
             <br/>
             </div>
             </>)
